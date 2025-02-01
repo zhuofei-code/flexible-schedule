@@ -129,8 +129,8 @@ drop if WkArrang==.
 drop if WkArran2==.
 
 
-//analysis example
-//table 1
+//weighted OLS regression analysis example
+//table 2
 //model 1
 reg pwork_time i.type i.DMSex i.class i.child c.DVAge c.loghinc c.GenHlth [pw=ind_wt]
 
