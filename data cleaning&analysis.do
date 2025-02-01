@@ -79,6 +79,9 @@ egen sleep=rcount( act1_1-act1_144 ), c(@==110)
 
 gen sleep_time=sleep*10
 
+//personal_time=personal+sleep
+g personal_time2=personal_time+sleep_time
+
 //free
 g free=1440-working_time-household_time-routine_time-food_time-nonroutine_time-childcare_time-sleep_time-personal_time
 
@@ -138,7 +141,7 @@ reg pwork_time i.type i.DMSex i.class i.child c.DVAge c.loghinc c.GenHlth [pw=in
 reg house i.type i.DMSex i.class i.child c.DVAge c.loghinc c.GenHlth [pw=ind_wt]
 
 //model 3
-reg personal_time i.type i.DMSex i.class i.child c.DVAge c.loghinc c.GenHlth [pw=ind_wt]
+reg personal_time2 i.type i.DMSex i.class i.child c.DVAge c.loghinc c.GenHlth [pw=ind_wt]
 
 //model 4
 reg free i.type i.DMSex i.class i.child c.DVAge c.loghinc c.GenHlth [pw=ind_wt]
@@ -152,7 +155,7 @@ reg pwork_time i.type##i.class i.DMSex  i.child c.DVAge c.loghinc c.GenHlth [pw=
 reg house i.type##i.class i.DMSex  i.child c.DVAge c.loghinc c.GenHlth [pw=ind_wt]
 
 //model 3
-reg personal_time i.type##i.class i.DMSex  i.child c.DVAge c.loghinc c.GenHlth [pw=ind_wt]
+reg personal_time2 i.type##i.class i.DMSex  i.child c.DVAge c.loghinc c.GenHlth [pw=ind_wt]
 
 //model 4
 reg free i.type##i.class i.DMSex  i.child c.DVAge c.loghinc c.GenHlth [pw=ind_wt]
@@ -166,9 +169,12 @@ reg pwork_time i.type##i.class  i.child c.DVAge c.loghinc c.GenHlth if DMSex ==1
 reg free i.type##i.class  i.child c.DVAge c.loghinc c.GenHlth if DMSex ==1 [pw=ind_wt]
 
 //model 3
-reg pwork_time i.type##i.class  i.child c.DVAge c.loghinc c.GenHlth if DMSex ==2 [pw=ind_wt]
+reg pwork_time2 i.type##i.class  i.child c.DVAge c.loghinc c.GenHlth if DMSex ==2 [pw=ind_wt]
 
 //model 4
 reg free i.type##i.class  i.child c.DVAge c.loghinc c.GenHlth if DMSex ==2 [pw=ind_wt]
 
-
+//descriptive example
+sum pwork_time if type==0 [aw=ind_wt]
+sum pwork_time if type==1 [aw=ind_wt]
+sum pwork_time if type==2 [aw=ind_wt]
